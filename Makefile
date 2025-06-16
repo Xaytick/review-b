@@ -55,12 +55,32 @@ generate:
 	go generate ./...
 	go mod tidy
 
+.PHONY: validate
+# validate
+validate:
+	protoc --proto_path=. \
+	       --proto_path=./third_party \
+	       --go_out=paths=source_relative:. \
+	       --validate_out=paths=source_relative,lang=go:. \
+	       $(API_PROTO_FILES)
+
+.PHONY: error
+# generate error proto
+error:
+	protoc --proto_path=. \
+	       --proto_path=./third_party \
+	       --go_out=paths=source_relative:. \
+	       --go-errors_out=paths=source_relative:. \
+	       $(API_PROTO_FILES)
+
 .PHONY: all
 # generate all
 all:
-	make api;
-	make config;
-	make generate;
+	make api
+	make config
+	make generate
+	make validate
+	make error
 
 # show help
 help:
