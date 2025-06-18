@@ -17,5 +17,15 @@ func NewBusinessService(uc *biz.BusinessUsecase) *BusinessService {
 }
 
 func (s *BusinessService) ReplyReview(ctx context.Context, req *pb.ReplyReviewRequest) (*pb.ReplyReviewReply, error) {
-	return &pb.ReplyReviewReply{}, nil
-}
+	replyId, err := s.uc.CreateReply(ctx, &biz.ReplyParam{
+		ReviewID: req.ReviewID,
+		StoreID: req.StoreID,
+		Content: req.Content,
+		PicInfo: req.PicInfo,
+		VideoInfo: req.VideoInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &pb.ReplyReviewReply{ReplyID: replyId}, nil
+} 

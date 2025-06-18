@@ -1,15 +1,19 @@
 server:
   http:
-    addr: 0.0.0.0:8000
+    addr: 0.0.0.0:8010
     timeout: 1s
   grpc:
-    addr: 0.0.0.0:9000
+    addr: 0.0.0.0:9010
     timeout: 1s
 data:
   database:
     driver: mysql
-    source: root:root@tcp(127.0.0.1:3306)/test?parseTime=True&loc=Local
+    source: root:20020130@tcp(127.0.0.1:3307)/reviewdb?parseTime=True&loc=Local&charset=utf8mb4&collation=utf8mb4_unicode_ci
   redis:
-    addr: 127.0.0.1:6379
+    addr: 127.0.0.1:6380
     read_timeout: 0.2s
     write_timeout: 0.2s
+registry:
+  consul:
+    address: 127.0.0.1:8500
+    scheme: http

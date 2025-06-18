@@ -15,7 +15,7 @@ service Business {
     // 商家回复用户评论
     rpc ReplyReview (ReplyReviewRequest) returns (ReplyReviewReply) {
         option (google.api.http) = {
-            post: "/business/v1/review/reply"
+            post: "/b/v1/review/reply"
             body: "*"
         };
     }
