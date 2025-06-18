@@ -6,7 +6,26 @@ info:
     title: ""
     version: 0.0.1
 paths:
-    /business/v1/review/reply:
+    /b/v1/review/appeal:
+        post:
+            tags:
+                - Business
+            description: 商家申诉用户评论
+            operationId: Business_AppealReview
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.business.v1.AppealReviewRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.business.v1.AppealReviewReply'
+    /b/v1/review/reply:
         post:
             tags:
                 - Business
@@ -141,6 +160,31 @@ paths:
                                 $ref: '#/components/schemas/api.review.v1.GetReviewReply'
 components:
     schemas:
+        api.business.v1.AppealReviewReply:
+            type: object
+            properties:
+                appealID:
+                    type: string
+                status:
+                    type: integer
+                    format: int32
+            description: 申诉评论回复
+        api.business.v1.AppealReviewRequest:
+            type: object
+            properties:
+                reviewID:
+                    type: string
+                storeID:
+                    type: string
+                reason:
+                    type: string
+                content:
+                    type: string
+                picInfo:
+                    type: string
+                videoInfo:
+                    type: string
+            description: 申诉评论请求
         api.business.v1.ReplyReviewReply:
             type: object
             properties:
@@ -160,6 +204,7 @@ components:
                     type: string
                 videoInfo:
                     type: string
+            description: 回复评论请求
         api.review.v1.AppealReviewReply:
             type: object
             properties:

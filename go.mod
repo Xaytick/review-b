@@ -19,6 +19,7 @@ require (
 require (
 	dario.cat/mergo v1.0.0 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/fatih/color v1.14.1 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-kratos/aegis v0.2.0 // indirect

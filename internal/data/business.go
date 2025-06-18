@@ -40,3 +40,19 @@ func (r *businessRepo) Reply(ctx context.Context, param *biz.ReplyParam) (int64,
 	return ret.ReplyID, nil
 }
 
+func (r *businessRepo) AppealReview(ctx context.Context, param *biz.AppealReviewParam) (int64, error) {
+	r.log.WithContext(ctx).Infof("[data] AppealReview: %+v", param)
+	ret, err := r.data.rc.AppealReview(ctx, &v1.AppealReviewRequest{
+		ReviewID: param.ReviewID,
+		StoreID: param.StoreID,
+		Reason: param.Reason,
+		Content: param.Content,
+		PicInfo: param.PicInfo,
+		VideoInfo: param.VideoInfo,
+	})
+	r.log.WithContext(ctx).Debugf("[data] AppealReview: ret:%+v, err:%+v", ret, err)
+	if err != nil {
+		return 0, err
+	}
+	return ret.AppealID, nil
+}
